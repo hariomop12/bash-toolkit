@@ -1,4 +1,4 @@
-# dotfiles
+# bash-toolkit
 
 Bash configuration + two small scripts I use daily:
 
@@ -23,8 +23,8 @@ Bash configuration + two small scripts I use daily:
 ## Install
 
 ```bash
-git clone https://github.com/hariomop12/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
+git clone https://github.com/hariomop12/bash-toolkit.git ~/.bash-toolkit
+cd ~/.bash-toolkit
 ./install.sh
 ```
 

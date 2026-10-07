@@ -1,5 +1,5 @@
 # ~/.bashrc — Hariom's shell config
-# https://github.com/hariomop12/dotfiles
+# https://github.com/hariomop12/bash-toolkit
 #
 # Layout:
 #   1. PATH            — set BEFORE the interactive guard so scripts
