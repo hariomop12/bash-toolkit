@@ -1,0 +1,49 @@
+# ── Never commit these ───────────────────────────────────────
+# Local secrets / credentials
+*.env
+.env*
+*.key
+*.pem
+id_rsa*
+id_ed25519*
+known_hosts
+credentials
+netrc
+.auth*
+*.token
+
+# Anything that looks like an API key or password in a config
+secrets*
+*secret*
+*password*
+*passwd*
+
+# ── Runtime state (machine-specific, regenerates itself) ──────
+*.log
+logs/
+*.pid
+.state/
+local/
+*.local
+
+# ── Editor / OS noise ────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# ── Backups install.sh creates ───────────────────────────────
+.dotfiles-backup/
+
+# ── Build artifacts ──────────────────────────────────────────
+node_modules/
+__pycache__/
+*.pyc
+dist/
+build/
+*.o
+*.out

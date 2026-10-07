@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# ─────────────────────────────────────────────────────────────
+#  play — search YouTube and start playing audio-only
+#
+#  The stream continues past the first result: it asks mpv for the
+#  RD-mix of whatever matched (YouTube's "up next" feed for that
+#  video), so the next songs keep coming without another search.
+#
+#  Deps: yt-dlp, mpv
+#
+#  Usage:
+#    play                    # usage
+#    play <song name>        # search + play, then keep going
+#
+#  Exit: 0 ok, 1 no args / no tools, else mpv's own code.
+# ─────────────────────────────────────────────────────────────
+set -uo pipefail
+
+usage() { echo "usage: play <song name>" >&2; }
+
+[ $# -eq 0 ] && { usage; exit 1; }
+
+# Refuse early instead of failing halfway through mpv's startup.
+for tool in yt-dlp mpv; do
+  command -v "$tool" >/dev/null 2>&1 || {
+    echo "play: missing dependency '$tool'" >&2
+    echo "      install: sudo apt install $tool" >&2
+    exit 1
+  }
+done
+
+# 1) Find the id of the best match for the query.
+#    timeout guards against yt-dlp hanging on a dead network.
+id=$(timeout 45 yt-dlp --no-warnings --get-id "ytsearch1:$*" 2>/dev/null | head -1)
+
+if [ -z "$id" ]; then
+  # No single match. Fall back to a 25-result search playlist so the
+  # user still gets music rather than an error.
+  echo "play: search for '$*' failed — playing a search playlist instead" >&2
+  exec mpv --no-video "ytdl://ytsearch25:$*"
+fi
+
+# 2) Play it and continue with RD$id (the related-mix for this id).
+#    playlist-end=50 keeps it bounded instead of running forever.
+exec mpv --no-video --ytdl-raw-options=yes-playlist=,playlist-end=50 \
+    "ytdl://https://www.youtube.com/watch?v=$id&list=RD$id"
