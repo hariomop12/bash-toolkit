@@ -72,9 +72,10 @@ alias l='ls -CF'
 alias c='clear'
 alias y='yazi'
 
-# t  →  abhi ka time aur date print karo
-#     t          13:40:30 | Friday, 09 October 2026 (IST)
-alias t='date "+%H:%M:%S | %A, %d %B %Y (%Z)"'
+# t  →  abhi ka time aur date print karo (12-hour, AM/PM)
+#     t          01:42:43 PM | Friday, 09 October 2026 (IST)
+#     %I = 01-12 ghanta, %p = AM/PM
+alias t='date "+%I:%M:%S %p | %A, %d %B %Y (%Z)"'
 
 # speed  →  internet speed test (ping / download / upload)
 # Deps: sudo apt install speedtest-cli
