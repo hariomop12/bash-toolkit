@@ -72,6 +72,16 @@ alias l='ls -CF'
 alias c='clear'
 alias y='yazi'
 
+# t  →  abhi ka time aur date print karo
+#     t          13:40:30 | Friday, 09 October 2026 (IST)
+alias t='date "+%H:%M:%S | %A, %d %B %Y (%Z)"'
+
+# speed  →  internet speed test (ping / download / upload)
+# Deps: sudo apt install speedtest-cli
+# --simple se 3 hi lines aati hain; poori report chahiye to
+# seedha `speedtest-cli` chala lo.
+alias speed='speedtest-cli --simple'
+
 # play <gaane ka naam>  →  YouTube se chalao.
 # Logic bin/play me hai, aur $HOME/bin PATH me hai to seedha chalta
 # hai — alias ki zaroorat nahi. Gaana khatam hone pe agla automatically
